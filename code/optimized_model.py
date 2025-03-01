@@ -138,3 +138,13 @@ print("\nAdditional Tools Purchased (per quarter):")
 for q in quarters:
     invest = {w: delta_y[w, q].varValue for w in ws_names}
     print(f"{q}: {invest}")
+
+# Calculate the profit
+additional_tools = {}
+additional_capex = 0
+for station, num_tools in init_tools.items():
+  additional_tools[station] = cap[station] - num_tools
+  additional_capex += additional_tools[station] * capex[station]
+
+profit = sum(x for x in total_gb_output.values()) * 0.002 - additional_capex * 1e6
+profit / 1e6
